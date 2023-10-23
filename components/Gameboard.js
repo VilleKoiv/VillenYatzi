@@ -14,7 +14,7 @@ export default Gameboard = ({navigation, route}) => {
 
     const [playerName, setPlayerName] = useState('');
     const [nbrOfThrowsLeft, setNbrOfThrowsLeft] = useState(NBR_OF_THROWS);
-    const [status, setStatus] = useState('Throw dices');
+    const [status, setStatus] = useState('Aloita peli heittämällä noppia');
     const [gameEndStatus, setGameEndStatus] = useState(false);
     // onko nopat valittu
     const [selectedDices, setSelectedDices] = 
@@ -112,18 +112,29 @@ export default Gameboard = ({navigation, route}) => {
             return points[i];
         }
         else {
-            setStatus('Heitä ' + NBR_OF_THROWS + ' kertaa ennen pisteiden valintaa');
+            setStatus('Heitä ' + nbrOfThrowsLeft + ' kertaa ennen pisteiden valintaa');
         }
     }
 
-    const savePlayerPoints = async() => {
+    const totalPoints = dicePointsTotal.reduce((acc, curr) => acc + curr, 0);
+    let bonusPoints = 0;
+
+    if (totalPoints >= BONUS_POINTS_LIMIT) {
+        bonusPoints = BONUS_POINTS;
+    }
+    const nyt = new Date();
+    const currentDate = nyt.toDateString();
+    const currentTime = nyt.toLocaleTimeString();
+    const savePlayerPoints = async() => 
+    {
+
      const newKey = scores.length + 1;
      const playerPoints = {
         key: newKey,
         name: playerName,
-        date: 'pvm',    // pvm tähän funktiolla
-        time: 'time',   // kellonaika tähän funktiolla
-        points: 0       // yhteispisteet (mahdollinen bomus mukana)
+        date: currentDate,
+        time: currentTime,
+        points: totalPoints + bonusPoints 
      }
      try {
         const newScore = [...scores, playerPoints];
@@ -168,7 +179,7 @@ export default Gameboard = ({navigation, route}) => {
         }
         setNbrOfThrowsLeft(nbrOfThrowsLeft-1);
         setDiceSpots(spots);
-        setStatus('Select and throw dices again');
+        setStatus('Valitse silmäluvut ja heitä noppia uudestaan');
     }
 
     function getSpotTotal(i) {
@@ -182,16 +193,16 @@ export default Gameboard = ({navigation, route}) => {
             setSelectedDices(dices);
     }
         else {
-            setStatus('You have to throw dices first')
+            setStatus('Sinun täytyy heittää noppia')
         }
     }
 
     function getDicePointsColor(i) {
-        return (selectedDicePoints[i] && !gameEndStatus) ? "black" : "steelblue"
+        return (selectedDicePoints[i] && !gameEndStatus) ? "chocolate" : "steelblue"
     }
 
     function getDiceColor(i) {
-        return selectedDices[i] ? "black" : "steelblue"
+        return selectedDices[i] ? "chocolate" : "steelblue"
     }
 
 
@@ -199,11 +210,11 @@ export default Gameboard = ({navigation, route}) => {
         <>
         <Header />
         <View>
-            <Text>Gameboard here..</Text>
+            <Text>--Pelilauta--</Text>
             <Container fluid>
                 <Row>{dicesRow}</Row>
             </Container>
-            <Text>Throws left: {nbrOfThrowsLeft}</Text>
+            <Text>Heittoja jäljellä: {nbrOfThrowsLeft}</Text>
             <Text>{status}</Text>
             <Pressable
                 onPress={()=>throwDices()}
@@ -219,7 +230,7 @@ export default Gameboard = ({navigation, route}) => {
                 onPress={() => savePlayerPoints()}>
                 <Text>Tallenna pisteet</Text>
             </Pressable>
-            <Text>Player: {playerName}</Text>
+            <Text>Pelaaja: {playerName}</Text>
         </View>
         <Footer />
         </>
