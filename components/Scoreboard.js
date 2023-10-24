@@ -24,6 +24,7 @@ export default Scoreboard = ({ navigation }) => {
             const jsonValue = await AsyncStorage.getItem(SCORDEBOARD_KEY);
             if (jsonValue !== null) {
                 let tmpScores = JSON.parse(jsonValue);
+                tmpScores.sort((a, b) => b.points - a.points);
                 setScores(tmpScores);
             }  
         }
@@ -47,7 +48,7 @@ export default Scoreboard = ({ navigation }) => {
         <>
         <Header />
         <View>
-            <Text style={styles.gameinfo}>PISTETAULU</Text>
+            <Text style={styles.gameinfo}>PISTETAULU TOP 5</Text>
             { scores.length === 0 ?
             <Text style={styles.gameinfo}>Pistetaulu on tyhjä</Text>    
             :
