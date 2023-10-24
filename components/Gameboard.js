@@ -209,14 +209,14 @@ export default Gameboard = ({navigation, route}) => {
     return(
         <>
         <Header />
-        <View>
-            <Text>--Pelilauta--</Text>
+        <View style={styles.gameboard}>
+            <Text>--PELILAUTA--</Text>
             <Container fluid>
                 <Row>{dicesRow}</Row>
             </Container>
             <Text>Heittoja jäljellä: {nbrOfThrowsLeft}</Text>
             <Text>{status}</Text>
-            <Pressable
+            <Pressable style={styles.button}
                 onPress={()=>throwDices()}
                 ><Text>HEITÄ NOPPIA</Text>
             </Pressable>
@@ -226,7 +226,7 @@ export default Gameboard = ({navigation, route}) => {
             <Container fluid>
                 <Row>{pointsToSelectRow}</Row>
             </Container>
-            <Pressable
+            <Pressable style={styles.button}
                 onPress={() => savePlayerPoints()}>
                 <Text>Tallenna pisteet</Text>
             </Pressable>

@@ -47,9 +47,9 @@ export default Scoreboard = ({ navigation }) => {
         <>
         <Header />
         <View>
-            <Text>Scoreboard here</Text>
+            <Text style={styles.gameinfo}>PISTETAULU</Text>
             { scores.length === 0 ?
-            <Text>Scoreboard is empty</Text>    
+            <Text style={styles.gameinfo}>Pistetaulu on tyhjä</Text>    
             :
             scores.map((player, index) => (
                 index < NBR_OF_SCOREBOARD_ROWS && 
@@ -63,10 +63,10 @@ export default Scoreboard = ({ navigation }) => {
             ))
             }
         </View>
-        <View>
-            <Pressable
+        <View style={styles.gameboard}>
+            <Pressable style={styles.button}
                 onPress={() => clearScoreboard()}>
-                    <Text>CLEAR SCOREBOARD</Text>
+                    <Text style={styles.buttonText}>TYHJENNÄ PISTETAULU</Text>
             </Pressable>
         </View>
         <Footer />

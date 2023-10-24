@@ -21,21 +21,21 @@ export default Home = ({ navigation }) => {
     return(
         <>
             <Header />
-            <View>
+            <View style={styles.gameboard}>
                 <MaterialCommunityIcons name="information" size={90} color="red" />
                 {!hasPlayername ?
                 <>
-                    <Text>For scoreboard enter your name...</Text>
-                    <TextInput onChangeText={setPlayerName} autoFocus={true} />
-                    <Pressable
+                    <Text>Syötä nimesi pistetaulua varten</Text>
+                    <TextInput onChangeText={setPlayerName} autoFocus={true}/>
+                    <Pressable style={styles.button}
                         onPress={() => handlePlayerName(playerName)}
                         ><Text>OK</Text>
                     </Pressable>
                 </>
                 :
                 <>
-                    <Text>Säännöt</Text>
-                    <Text multiline="true">
+                    <Text>SÄÄNNÖT</Text>
+                    <Text multiline="true" style={styles.gameinfo}>
                         THE GAME: Upper section of the classic Yahtzee 
                         dice game. You have {NBR_OF_DICES} dices and 
                         for the every dice you have {NBR_OF_THROWS} throws. 
@@ -50,23 +50,23 @@ export default Home = ({ navigation }) => {
                         {BONUS_POINTS_LIMIT} points is the limit of 
                         getting bonus which gives you {BONUS_POINTS} points more.
                     </Text>
-                    <Text multiline="true">POINTS: 
+                    <Text multiline="true" style={styles.gameinfo}>POINTS: 
                         After each turn game calculates the sum 
                         for the dices you selected. Only the dices having 
                         the same spot count are calculated. Inside the 
                         game you can not select same points 
                         from {MIN_SPOT} to {MAX_SPOT} again.
                     </Text>
-                    <Text multiline="true">GOAL: 
+                    <Text multiline="true" style={styles.gameinfo}>GOAL: 
                         To get points as much as possible. 
                         {BONUS_POINTS_LIMIT} points is the limit of 
                         getting bonus which gives you {BONUS_POINTS}  points more.
                     </Text>
                     <Text>Good luck, {playerName}</Text>
-                    <Pressable
+                    <Pressable style={styles.button}
                         onPress={()=> navigation.navigate('Gameboard', {player: playerName})}
                     >
-                        <Text>PLAY</Text>
+                        <Text>PELAA</Text>
                     </Pressable>
                 </>
                 }

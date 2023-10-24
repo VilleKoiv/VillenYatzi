@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -8,12 +8,12 @@ export default StyleSheet.create({
   header: {
     marginTop: 30,
     marginBottom: 15,
-    backgroundColor: 'skyblue',
+    backgroundColor: 'gray',
     flexDirection: 'row',
   },
   footer: {
     marginTop: 20,
-    backgroundColor: 'skyblue',
+    backgroundColor: 'gray',
     flexDirection: 'row'
   },
   title: {
@@ -41,8 +41,8 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
     textAlign: 'center',
     justifyContent: 'center',
-    fontSize: 20,
-    marginTop: 10
+    fontSize: 15,
+    marginTop: 10,
   },
   row: {
     marginTop: 20,
@@ -55,7 +55,7 @@ export default StyleSheet.create({
     margin: 30,
     flexDirection: "row",
     padding: 10,
-    backgroundColor: "#73CED6",
+    backgroundColor: "lightpink",
     width: 150,
     borderRadius: 15,
     justifyContent: 'center',
@@ -63,6 +63,7 @@ export default StyleSheet.create({
   },
   buttonText: {
     color:"#2B2B52",
-    fontSize: 20
+    fontSize: 17,
+    textAlign: 'center'
   }
 });
